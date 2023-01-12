@@ -1,12 +1,17 @@
-import axios from 'axios';
+import axios from "axios"
 
-const res = async () => {
-    const res = axios.post("/register", {
+
+export const api = axios.create({
+  baseURL: "http://localhost:3000/"
+}) 
+
+export const createSession = async () => {
+  return await axios.post("http://localhost:3000/register", {
       name: "teste",
       email: "teste@gmail.com",
-      password: "teste123" 
+      passoword: "teste12322",
     })
-    
-    return await res
+
 }
-console.log(res)
+
+ 

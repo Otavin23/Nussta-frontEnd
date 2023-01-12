@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { arrUser } from "../../utils/data";
+import { createSession } from "../../service/api";
 
 export const Register = () => {
   const [error, setError] = useState(false);
@@ -11,13 +12,14 @@ export const Register = () => {
     passwordCheck: "",
   });
 
-  const registersss = () => {
+  const registersss = async () => {
     event?.preventDefault();
     if (dataUser.password !== dataUser.passwordCheck) setError(true);
     if (dataUser.password === dataUser.passwordCheck) setError(false);
 
     arrUser.push({ ...dataUser });
-    console.log(arrUser);
+    const response = await createSession();
+    console.log(response);
   };
 
   return (
