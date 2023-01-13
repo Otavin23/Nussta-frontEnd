@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { arrUser } from "../../utils/data";
-import { createSession } from "../../service/api";
+//import { createSession } from "../../service/api";
+import axios from "axios";
 
 export const Register = () => {
   const [error, setError] = useState(false);
@@ -16,11 +17,28 @@ export const Register = () => {
     event?.preventDefault();
     if (dataUser.password !== dataUser.passwordCheck) setError(true);
     if (dataUser.password === dataUser.passwordCheck) setError(false);
-
-    arrUser.push({ ...dataUser });
-    const response = await createSession();
-    console.log(response);
   };
+
+  useEffect(() => {
+    async function hello() {
+      const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "testewer56555656tyuiop",
+          email: "testerqwe7676767rtyui@gmail.com",
+          password: "1234567",
+        }),
+      });
+
+      console.log(await response.json());
+    }
+
+    hello();
+  }, []);
 
   return (
     <main className=" w-[30rem] p-[1rem]  border border-violet-3">
